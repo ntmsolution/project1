@@ -1,0 +1,153 @@
+<div class="content-wrapper" style="min-height: 946px;">
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-8">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Add User</h3>
+                    </div><!-- /.box-header -->
+                    <!-- form start -->
+                    <form role="form" action="/auser/adduser" method="post" enctype="multipart/form-data">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="first_name">First Name</label>
+                                <input type="text" name="first_name" class="form-control" id="first_name" placeholder="Enter First Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="last_name">Last Name</label>
+                                <input type="text" name="last_name" class="form-control" id="last_name" placeholder="Enter Last Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="user_name">User Name</label>
+                                <input type="text" name="user_name" class="form-control" id="user_name" placeholder="Enter User Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" class="form-control" id="email" placeholder="Enter Email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" class="form-control" id="password" placeholder="Enter Password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <textarea class="form-control" name="address" rows="3" placeholder="Enter Address" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone_no">Phone No</label>
+                                <input type="text" name="phone_no" class="form-control" id="phone_no" placeholder="Enter Phone No" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Select Country</label>
+                                <select onchange="getState(this.value)" class="form-control" name="country" id="country">
+                                    <option>-- Select --</option>
+                                    <%
+                                    if(countrydata.length!=0){
+                                    countrydata.forEach(function(data){
+                                        console.log(data.country_name);
+                                    %>
+                                    <option value="<%- data.id-%>"><%- data.country_name-%></option>
+                                    <% }) %>
+                                    <% }  %>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Select State</label>
+                                <select onchange="getcity()" class="form-control" name="state" id="state">
+                                    <option>-- Select --</option>
+
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Select City</label>
+                                <select class="form-control" name="city" id="city" >
+                                    <option>-- Select --</option>
+
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <div class="form-control">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="1">
+                                            <label class="form-check-label" for="inlineRadio1">Male</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="0">
+                                            <label class="form-check-label" for="inlineRadio2">FeMale</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="form-group" onchange="gethobbiesdata()" id="hobbies">
+                                <label>Hobbies</label>
+                                <div class="form-control">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="hobbies" id="checkbox" value="cricket">
+                                                <label class="form-check-label" for="inlineCheckbox1">Cricket</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="hobbies" id="checkbox" value="basketball">
+                                                <label class="form-check-label" for="inlineCheckbox1">Basketball</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="hobbies" id="checkbox" value="newtecsearching">
+                                                <label class="form-check-label" for="inlineCheckbox1">New Tec. Searching</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="birthdate">Birthdate</label>
+                                <input type="date" name="birthdate" class="form-control" id="birthdate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="device_token">Device Token</label>
+                                <input type="text" name="device_token" class="form-control" id="device_token" placeholder="Enter Device Token" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="device_type">Device Type</label>
+                                <input type="text" name="device_type" class="form-control" id="device_type" placeholder="Enter Device Type" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="user_type">User Type</label>
+                                <input type="text" name="user_type" class="form-control" id="user_type" placeholder="Enter User Type" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <input type="text" name="status" class="form-control" id="status" placeholder="Enter Status" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profile_pic">File input</label>
+                                <input type="file" name="profile_pic" id="profile_pic" >
+                            </div>
+                        </div><!-- /.box-body -->
+
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary" id="btnGet">Add User</button>
+                        </div>
+                    </form>
+                </div><!-- /.box -->
+            </div><!--/.col (left) -->
+        </div>   <!-- /.row -->
+    </section><!-- /.content -->
+</div>

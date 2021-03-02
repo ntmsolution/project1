@@ -1,0 +1,39 @@
+/*
+ * Component: Admin List
+ * ---------------------
+ */
+.admin-list {
+  &:extend(.list-unstyled);
+  > li {
+    width: 25%;
+    float: left;
+    padding: 10px;
+    text-align: center;
+    img {
+      .border-radius(50%);
+      max-width: 100%;
+      height: auto;
+    }  
+    > a:hover {
+      &,
+      .admin-list-name {
+        color: #999;  
+      }
+    }
+  }
+}
+.admin-list-name,
+.admin-list-date {
+  display: block;  
+}
+.admin-list-name {
+  font-weight: 600;
+  color: #444;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;  
+}
+.admin-list-date {
+  color: #999;
+  font-size: 12px;
+}

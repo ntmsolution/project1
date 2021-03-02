@@ -1,0 +1,203 @@
+<div class="content-wrapper" style="min-height: 946px;">
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-8">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Edit User</h3>
+                    </div><!-- /.box-header -->
+                    <!-- form start -->
+                    <form role="form" action="/edit_user/edituser" method="post" enctype="multipart/form-data">
+                        <%
+                        if(userData.length!=0 ){
+                            console.log("id = "+userData.id);
+                        %>
+
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="id">id</label>
+                                <input type="text" name="id" class="form-control" id="id" placeholder="id" required value="<%-userData.id-%>" >
+                            </div>
+                            <div class="form-group">
+                                <label for="first_name">First Name</label>
+                                <input type="text" name="first_name" class="form-control" id="first_name" placeholder="Enter First Name" required value="<%-userData.first_name-%>">
+                            </div>
+                            <div class="form-group">
+                                <label for="last_name">Last Name</label>
+                                <input type="text" name="last_name" class="form-control" id="last_name" placeholder="Enter Last Name" required value="<%-userData.last_name-%>">
+                            </div>
+                            <div class="form-group">
+                                <label for="user_name">User Name</label>
+                                <input type="text" name="user_name" class="form-control" id="user_name" placeholder="Enter User Name" required value="<%-userData.user_name-%>">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" class="form-control" id="email" placeholder="Enter Email" required value="<%-userData.email-%>">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="text" name="password" class="form-control" id="password" placeholder="Enter Password" required value="<%-userData.password-%>">
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <textarea class="form-control" name="address" rows="3" placeholder="Enter Address" required > <%-userData.address-%> </textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone_no">Phone No</label>
+                                <input type="text" name="phone_no" class="form-control" id="phone_no" placeholder="Enter Phone No" required value="<%-userData.phone_no-%>">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Select Country</label>
+                                <select  onchange="getState(this.value)"class="form-control" name="country" id="country">
+                                    <option>-- Select --</option>
+                                    <%
+                                    if(countrydata.length!=0){
+                                    countrydata.forEach(function(data){
+                                        console.log(data.country_name);
+                                       /* if (data.id == userData.country_id){*/
+
+                                    %>
+                                    <option value="<%- data.id-%>"><%- data.country_name-%> </option>
+                                    <% /* }*/
+                                        })
+                                        }
+                                    %>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Select State</label>
+                                <select onchange="getcity()" class="form-control" name="state" id="state">
+                                    <option>-- Select State --</option>
+                                    <%
+                                    if(statedata.length!=0){
+                                    statedata.forEach(function(data){
+                                        console.log(data.state_name);
+                                    if (data.id == userData.state_id){
+
+                                    %>
+                                        <option value="<%- data.id-%>" selected><%- data.state_name-%> </option>
+                                    <%  }
+                                    })
+                                    }
+                                    %>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Select City</label>
+                                <select class="form-control" name="city" id="city" >
+                                    <option>-- Select --</option>
+                                    <%
+                                    if(citydata.length!=0){
+                                    citydata.forEach(function(data){
+                                        console.log(data.city_name);
+                                    if (data.id == userData.city_id){
+
+                                    %>
+                                        <option value="<%- data.id-%>" selected><%- data.city_name-%> </option>
+                                    <%  }
+                                    })
+                                    }
+                                    %>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <div class="form-control">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="1" <% if(userData.gender == "1"){ %> checked <% } %> >
+                                            <label class="form-check-label" for="inlineRadio2">Male</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="0" <% if(userData.gender == "0"){ %> checked <% } %> >
+                                            <label class="form-check-label" for="inlineRadio2">FeMale</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Hobbies</label>
+
+                                <%
+                                    var array_hobbies = [];
+                                    array_hobbies = userData.hobbies;
+                                console.log(array_hobbies);
+                                %>
+
+                                <div class="form-control">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="hobbies[]" id="checkbox" value="cricket" <% if ("cricket" == array_hobbies) { %> aria-selected="true" <% } %>>
+                                                <label class="form-check-label" for="inlineCheckbox1">Cricket</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="hobbies[]" id="checkbox" value="basketball" <% if ("basketball" == array_hobbies) { %> checked <% } %>>
+                                                <label class="form-check-label" for="inlineCheckbox1">Basketball</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="hobbies[]" id="checkbox" value="newtecsearching" <% if ("newtecsearching" == array_hobbies) { %> checked <% } %> >
+                                                <label class="form-check-label" for="inlineCheckbox1">New Tec. Searching</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="birthdate">Birthdate</label>
+                                <input type="date" name="birthdate" class="form-control" id="birthdate" required value="<%-userData.birthdate-%>">
+                            </div>
+                            <div class="form-group">
+                                <label for="device_token">Device Token</label>
+                                <input type="text" name="device_token" class="form-control" id="device_token" placeholder="Enter Device Token" required value="<%-userData.device_token-%>">
+                            </div>
+                            <div class="form-group">
+                                <label for="device_type">Device Type</label>
+                                <input type="text" name="device_type" class="form-control" id="device_type" placeholder="Enter Device Type" required value="<%-userData.device_type-%>">
+                            </div>
+                            <div class="form-group">
+                                <label for="user_type">User Type</label>
+                                <input type="text" name="user_type" class="form-control" id="user_type" placeholder="Enter User Type" required value="<%-userData.user_type-%>">
+                            </div>
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <input type="text" name="status" class="form-control" id="status" placeholder="Enter Status" required value="<%-userData.status-%>">
+                            </div>
+                            <div class="form-group">
+                                <label for="profile_pic">File input</label>
+                                <input type="file" name="profile_pic" id="profile_pic" value="<%-userData.profile_pic-%>">
+                                <img src="http://localhost:3000/profile_pictures/<%-userData.profile_pic-%>" height="100px" width="100px" alt="Profile Pic" style="margin-top: 10px;">
+                            </div>
+                        </div><!-- /.box-body -->
+
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">Edit User</button>
+                        </div>
+                        <% } else{ %>
+                            <tr>
+                                <td colspan="7">No Data Found</td>
+                            </tr>
+                        <% } %>
+                    </form>
+                </div><!-- /.box -->
+            </div><!--/.col (left) -->
+        </div>   <!-- /.row -->
+    </section><!-- /.content -->
+</div>

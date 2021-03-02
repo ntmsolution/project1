@@ -1,0 +1,11 @@
+<% if(title == "login"){ %>
+    <%- body %>
+<% } else if(title == "forgetpassword"){ %>
+    <%- body %>
+<% } else { %>
+    <%- include('partials/header'); -%>
+    <%- include('partials/menu'); -%>
+    <%- body %>
+    <%- include('partials/footer'); -%>
+
+<% } %>
